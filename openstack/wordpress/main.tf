@@ -22,7 +22,7 @@ data "template_file" "cloud-config" {
   vars {
     name = "${var.name}"
     db_password = "${var.db_password}"
-    db_user = "${var.db_host}"
+    db_user = "${var.db_user}"
     db_host = "${var.db_host}"
     es_host = "${var.es_host}"
     consul = "${var.consul}"
