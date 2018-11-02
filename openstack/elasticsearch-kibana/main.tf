@@ -1,15 +1,15 @@
 # Create instance
-module "wordpress" {
+module "elasticsearch-kibana" {
   source = "github.com/entercloudsuite/terraform-modules//openstack/instance?ref=2.7"
   name = "${var.name}"
-  image = "ecs-docker 1.0.1"
-  quantity = "${var.quantity}"
+  image = "ecs-elasticsearch 1.0.3"
+  quantity = "1"
   flavor = "${var.flavor}"
   network_name = "${var.network_name}"
   sec_group = "${var.sec_group}"
   keypair = "${var.keypair}"
   tags = {
-    "server_group" = "WEB"
+    "server_group" = "LOGGING"
   }
   userdata = "${data.template_file.cloud-config.*.rendered}"
   discovery = "${var.discovery}"
@@ -20,14 +20,10 @@ module "wordpress" {
 data "template_file" "cloud-config" {
   template = "${file("${path.module}/cloud-config.yml")}"
   vars {
-    name = "${var.name}"
-    db_password = "${var.db_password}"
-    db_user = "${var.db_host}"
-    db_host = "${var.db_host}"
-    es_host = "${var.es_host}"
-    consul = "${var.consul}"
-    consul_port = "${var.consul_port}"
-    consul_datacenter = "${var.consul_datacenter}"
-    consul_encrypt = "${var.consul_encrypt}"
-  }
+  name = "${var.name}"
+  consul = "${var.consul}"
+  consul_port = "${var.consul_port}"
+  consul_datacenter = "${var.consul_datacenter}"
+  consul_encrypt = "${var.consul_encrypt}"
+    }
 }
