@@ -44,6 +44,16 @@ write_files:
             filebeat_output_elasticsearch_enabled: true
             filebeat_output_elasticsearch_hosts:
               - "${ es_host }"
+          - role: jobscore.beats
+            products:
+              - metricbeat
+              - heartbeat
+            metricbeat_config:
+              metricbeat.config.modules:
+              path: ${path.config}/modules.d/*.yml
+              reload.enabled: false
+              output.elasticsearch.hosts:
+                - 127.0.0.1:9200
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
             consul_configs:
@@ -75,6 +85,7 @@ write_files:
   - content: |
       - src: entercloudsuite.filebeat
         version: 1.0.0
+      - src: jobscore.beats
 
     path: /usr/src/cloud/requirements.yml
     permissions: '0400'
