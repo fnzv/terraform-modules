@@ -56,8 +56,6 @@ write_files:
     path: /usr/src/cloud/requirements.yml
     permissions: '0400'
 
-
-
 runcmd:
   - |
       bash <<'EOF'
@@ -81,4 +79,3 @@ runcmd:
       done
       export COMPLETED=false
       EOF
-
