@@ -83,6 +83,11 @@ write_files:
                 ui: true
                 enable_script_checks: true
                 services:
+                  - name: "exporter_cadvisor"
+                    checks:
+                      - http: "http://127.0.0.1:8080"
+                        method: "GET"
+                        interval: "2s"
                   - name: "${name}"
                     checks:
                       - http: "http://127.0.0.1:80"
