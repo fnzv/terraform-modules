@@ -50,7 +50,7 @@ write_files:
               - heartbeat
             metricbeat_config:
               metricbeat.config.modules:
-              path: ${path.config}/modules.d/*.yml
+              path: $${path.config}/modules.d/*.yml
               reload.enabled: false
               output.elasticsearch.hosts:
                 - 127.0.0.1:9200
