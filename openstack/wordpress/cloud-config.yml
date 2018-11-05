@@ -47,7 +47,6 @@ write_files:
           - role: jobscore.beats
             products:
               - metricbeat
-              - heartbeat
             metricbeat_config:
               metricbeat.config.modules:
                path: $${path.config}/modules.d/*.yml
