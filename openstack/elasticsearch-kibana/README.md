@@ -21,5 +21,3 @@ module "elasticsearch-kibana-logs" {
   consul_encrypt = "supersecretconsul"
 }
 ```
-
-
