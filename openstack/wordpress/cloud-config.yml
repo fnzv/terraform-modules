@@ -11,6 +11,19 @@ write_files:
             file: path=/opt/consul/data/serf/local.keyring state=absent
           - name: Run database container
             docker_container:
+              name: 'cadvisor-metrics'
+              image: 'google/cadvisor:v0.29.0'
+              state: 'started'
+              network_mode: "host"
+              restart_policy: "always"
+              ports:
+                - "8080:8080"
+              volumes:
+                - /:/rootfs:ro
+                - /var/run:/var/run:rw
+                - /sys:/sys:ro
+          - name: Run database container
+            docker_container:
               name: 'db'
               image: 'mariadb'
               state: 'started'
