@@ -53,7 +53,7 @@ write_files:
                path: $${path.config}/modules.d/*.yml
               reload.enabled: false
               output.elasticsearch.hosts:
-                - ${ es_host }
+                - "${ es_host }:9200"
               setup.kibana: {host: '${ es_host }:5601'}
               setup.template.settings: {index.codec: best_compression, index.number_of_shards: 1}
           - role: entercloudsuite.consul
