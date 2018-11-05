@@ -9,7 +9,7 @@ write_files:
             service: name=consul state=stopped
           - name: clean /opt/consul/data/serf/local.keyring
             file: path=/opt/consul/data/serf/local.keyring state=absent
-          - name: Run database container
+          - name: Run cAdvisor container
             docker_container:
               name: 'cadvisor-metrics'
               image: 'google/cadvisor:v0.29.0'
