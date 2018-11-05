@@ -5,7 +5,7 @@ variable "db_password" {
 }
 
 variable "es_host" {
-  default = "127.1.1.1:9200"
+  default = "127.1.1.1"
 }
 
 variable "db_host" {
