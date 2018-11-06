@@ -57,7 +57,7 @@ write_files:
             filebeat_output_elasticsearch_enabled: true
             filebeat_output_elasticsearch_hosts:
               - "${ es_host }:9200"
-          - role: jobscore.beats
+          - role: fnzv.beats
             products:
               - metricbeat
             metricbeat_config:
