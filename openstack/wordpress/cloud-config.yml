@@ -44,7 +44,7 @@ write_files:
             filebeat_output_elasticsearch_enabled: true
             filebeat_output_elasticsearch_hosts:
               - "${ es_host }:9200"
-          - role: jobscore.beats
+          - role: fnzv.beats
             products:
               - metricbeat
             metricbeat_config:
@@ -86,7 +86,7 @@ write_files:
   - content: |
       - src: entercloudsuite.filebeat
         version: 1.0.0
-      - src: jobscore.beats
+      - src: fnzv.beats
 
     path: /usr/src/cloud/requirements.yml
     permissions: '0400'
