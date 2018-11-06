@@ -2,7 +2,7 @@
 module "wordpress" {
   source = "github.com/entercloudsuite/terraform-modules//openstack/instance?ref=2.7"
   name = "${var.name}"
-  image = "ecs-docker 1.0.1"
+  image = "ecs-docker 1.0.2"
   quantity = "${var.quantity}"
   flavor = "${var.flavor}"
   network_name = "${var.network_name}"
