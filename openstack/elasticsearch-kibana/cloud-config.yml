@@ -17,6 +17,12 @@ write_files:
           - role: entercloudsuite.prometheus-exporter
             prometheus_exporter_name: node_exporter
             prometheus_exporter_version: 0.16.0
+          - role: entercloudsuite.prometheus-exporter
+            prometheus_exporter_name: elasticsearch_exporter
+            prometheus_exporter_version: 1.0.2
+            prometheus_github_username: justwatchcom
+            prometheus_exporter_config_flags:
+       '-es.uri': 'http://localhost:9200'
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
             consul_configs:
@@ -39,6 +45,8 @@ write_files:
                         interval: "2s"
                   - name: "exporter_node"
                     port: 9100
+                  - name: "exporter_elasticseach"
+                    port: 9108
                 rejoin_after_leave: true
                 retry_join:
                   - "${consul}"
