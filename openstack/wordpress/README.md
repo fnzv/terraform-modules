@@ -17,7 +17,7 @@ module "wordpress" {
   keypair = "${var.keypair_name}"
   db_user = "db_user"
   db_host = "127.0.0.1"
-  es_host = "127.0.0.1:9200"
+  es_host = "127.0.0.1"
   db_password = "yourverylongpasswordhere"
   consul = "consul.service.automium.consul"
   consul_datacenter = "automium"
