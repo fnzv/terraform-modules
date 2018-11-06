@@ -84,8 +84,6 @@ write_files:
     permissions: '0400'
 
   - content: |
-      - src: entercloudsuite.filebeat
-        version: 1.0.0
       - src: fnzv.beats
 
     path: /usr/src/cloud/requirements.yml
