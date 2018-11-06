@@ -39,6 +39,8 @@ write_files:
                         interval: "2s"
                   - name: "exporter_node"
                     port: 9100
+                  - name: "exporter_elasticseach"
+                    port: 9108
                 rejoin_after_leave: true
                 retry_join:
                   - "${consul}"
