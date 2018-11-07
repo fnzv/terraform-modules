@@ -3,6 +3,8 @@ write_files:
   - content: |
       - name: run the main role
         hosts: 127.0.0.1
+        post_tasks:
+          - shell: metricbeat setup --dashboards
         roles:
           - role: entercloudsuite.elasticsearch
             es_enable_xpack: true
@@ -17,6 +19,9 @@ write_files:
           - role: entercloudsuite.prometheus-exporter
             prometheus_exporter_name: node_exporter
             prometheus_exporter_version: 0.16.0
+          - role: fnzv.beats
+            products:
+              - metricbeat
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
             consul_configs:
