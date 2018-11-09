@@ -5,6 +5,8 @@ write_files:
   - content: |
       - hosts: localhost
         pre_tasks:
+          - name: install auditd
+            package: name=auditd state=present
           - name: stop consul
             service: name=consul state=stopped
           - name: clean /opt/consul/data/serf/local.keyring
@@ -47,6 +49,12 @@ write_files:
           - role: fnzv.beats
             products:
               - metricbeat
+              - auditbeat
+            auditbeat_config:
+              output.elasticsearch.hosts:
+                - "${ es_host }:9200"
+              setup.kibana: {host: '${ es_host }:5601'}
+              setup.template.settings: {index.codec: best_compression, index.number_of_shards: 1}
             metricbeat_config:
               metricbeat.config.modules:
                path: $${path.config}/modules.d/*.yml
