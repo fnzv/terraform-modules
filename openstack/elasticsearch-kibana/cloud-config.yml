@@ -3,6 +3,11 @@ write_files:
   - content: |
       - name: run the main role
         hosts: 127.0.0.1
+        pre_tasks:
+          - name: stop consul
+            service: name=consul state=stopped
+          - name: clean /opt/consul/data/serf/local.keyring
+            file: path=/opt/consul/data/serf/local.keyring state=absent
         post_tasks:
           - shell: metricbeat setup --dashboards
         roles:
