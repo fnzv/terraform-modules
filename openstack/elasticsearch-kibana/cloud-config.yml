@@ -9,6 +9,7 @@ write_files:
           - name: clean /opt/consul/data/serf/local.keyring
             file: path=/opt/consul/data/serf/local.keyring state=absent
         post_tasks:
+          - shell: echo 'Y3VybCAnaHR0cDovLzEyNy4xOjU2MDEvYXBpL3NhdmVkX29iamVjdHMvaW5kZXgtcGF0dGVybicgLS1jb21wcmVzc2VkIC1IICdSZWZlcmVyOiBodHRwOi8vMTI3LjE6NTYwMS9hcHAva2liYW5hJyAtSCAnY29udGVudC10eXBlOiBhcHBsaWNhdGlvbi9qc29uJyAtSCAna2JuLXZlcnNpb246IDYuNC4yJyAtSCAnb3JpZ2luOiBodHRwOi8vMTI3LjE6NTYwMScgLUggJ0ROVDogMScgLUggJ0Nvbm5lY3Rpb246IGtlZXAtYWxpdmUnIC1IICdQcmFnbWE6IG5vLWNhY2hlJyAtSCAnQ2FjaGUtQ29udHJvbDogbm8tY2FjaGUnIC0tZGF0YSAneyJhdHRyaWJ1dGVzIjp7InRpdGxlIjoiZmlsZWJlYXQtKiIsInRpbWVGaWVsZE5hbWUiOiJAdGltZXN0YW1wIn19Jw==' | base64 --decode | bash
           - shell: metricbeat setup --dashboards && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
           - shell: wget https://git.io/fpqdr -O /root/rotate_elasticsearch.sh && chmod +x /root/rotate_elasticsearch.sh && echo "15 2   * * *  root  bash /root/rotate_elasticsearch.sh" >> /etc/crontab
         roles:
