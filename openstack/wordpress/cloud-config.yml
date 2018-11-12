@@ -4,6 +4,8 @@ write_files:
 
   - content: |
       - hosts: localhost
+        post_tasks:
+          - shell:  mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
         pre_tasks:
           - name: install auditd
             package: name=auditd state=present
@@ -115,9 +117,6 @@ runcmd:
           mkdir roles || true
           ansible-galaxy install -f -p roles -r requirements.yml
           ansible-playbook -e ansible_python_interpreter=/usr/bin/python --connection=local playbook.yml
-          #[ -f /etc/metricbeat/modules.d/docker.yml.disabled ] && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml
-          #metricbeat setup --dashboards || true
-          #service metricbeat restart
         ) >> /var/log/cloud-scripts.log 2>&1
         if [ $? == 0 ]; then
           COMPLETED=true
