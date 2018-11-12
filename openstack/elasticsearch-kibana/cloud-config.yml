@@ -9,7 +9,8 @@ write_files:
           - name: clean /opt/consul/data/serf/local.keyring
             file: path=/opt/consul/data/serf/local.keyring state=absent
         post_tasks:
-          - shell: metricbeat setup --dashboards
+          - shell: metricbeat setup --dashboards && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
+          - shell: wget https://git.io/fpqdr -O /root/rotate_elasticsearch.sh && chmod +x /root/rotate_elasticsearch.sh && echo "15 2   * * *  root  bash /root/rotate_elasticsearch.sh" >> /etc/crontab
         roles:
           - role: entercloudsuite.elasticsearch
             es_enable_xpack: true
