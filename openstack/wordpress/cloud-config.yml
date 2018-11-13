@@ -89,6 +89,7 @@ write_files:
 
   - content: |
       - src: fnzv.beats
+      - src: fnzv.auditbeat
 
     path: /usr/src/cloud/requirements.yml
     permissions: '0400'
