@@ -29,6 +29,7 @@ write_files:
           - role: fnzv.beats
             products:
               - metricbeat
+          - role: fnzv.auditbeat
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
             consul_configs:
@@ -63,6 +64,7 @@ write_files:
         version: 1.0.3
       - src: entercloudsuite.prometheus-exporter
       - src: fnzv.beats
+      - src: fnzv.auditbeat
       - src: entercloudsuite.kibana
         version: 1.0.1
 
