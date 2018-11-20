@@ -27,10 +27,10 @@ write_files:
           - role: entercloudsuite.prometheus-exporter
             prometheus_exporter_name: node_exporter
             prometheus_exporter_version: 0.16.0
-          - role: fnzv.beats
+          - role: entercloudsuite.beats
             products:
               - metricbeat
-          - role: fnzv.auditbeat
+          - role: entercloudsuite.auditbeat
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
             consul_configs:
@@ -64,8 +64,8 @@ write_files:
       - src: entercloudsuite.elasticsearch
         version: 1.0.3
       - src: entercloudsuite.prometheus-exporter
-      - src: fnzv.beats
-      - src: fnzv.auditbeat
+      - src: entercloudsuite.beats
+      - src: entercloudsuite.auditbeat
       - src: entercloudsuite.kibana
         version: 1.0.1
 
