@@ -46,7 +46,7 @@ write_files:
             filebeat_output_elasticsearch_enabled: true
             filebeat_output_elasticsearch_hosts:
               - "${ es_host }:9200"
-          - role: fnzv.beats
+          - role: entercloudsuite.beats
             products:
               - metricbeat
             metricbeat_config:
@@ -57,7 +57,7 @@ write_files:
                 - "${ es_host }:9200"
               setup.kibana: {host: '${ es_host }:5601'}
               setup.template.settings: {index.codec: best_compression, index.number_of_shards: 1}
-          - role: fnzv.auditbeat
+          - role: entercloudsuite.auditbeat
             elasticsearch_host: "${ es_host }:9200"
           - role: entercloudsuite.consul
             consul_config_validate: "{{ consul_user_home }}/bin/consul validate -config-format=json %s"
@@ -88,8 +88,8 @@ write_files:
     permissions: '0400'
 
   - content: |
-      - src: fnzv.beats
-      - src: fnzv.auditbeat
+      - src: entercloudsuite.beats
+      - src: entercloudsuite.auditbeat
 
     path: /usr/src/cloud/requirements.yml
     permissions: '0400'
