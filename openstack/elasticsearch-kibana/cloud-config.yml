@@ -64,8 +64,6 @@ write_files:
       - src: entercloudsuite.elasticsearch
         version: 1.0.3
       - src: entercloudsuite.prometheus-exporter
-      - src: entercloudsuite.beats
-      - src: entercloudsuite.auditbeat
       - src: entercloudsuite.kibana
         version: 1.0.1
 
