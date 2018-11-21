@@ -12,6 +12,7 @@ write_files:
             es_config:
               network.host: "0.0.0.0"
           - role: entercloudsuite.kibana
+            kibana_version: "6.4.3"
             kibana_server_port: 5601
             kibana_server_host: "0.0.0.0"
           - role: entercloudsuite.prometheus-exporter
