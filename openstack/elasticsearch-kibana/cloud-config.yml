@@ -14,10 +14,6 @@ write_files:
           - shell: auditbeat setup --dashboards 
           - shell: wget https://git.io/fpqdr -O /root/rotate_elasticsearch.sh && chmod +x /root/rotate_elasticsearch.sh && echo "15 2   * * *  root  bash /root/rotate_elasticsearch.sh" >> /etc/crontab
         roles:
-          - role: entercloudsuite.kibana
-            kibana_package: kibana=6.4.3
-            kibana_server_port: 5601
-            kibana_server_host: "0.0.0.0"
           - role: entercloudsuite.elasticsearch
             es_enable_xpack: true
             es_xpack_features: ["monitoring"]
@@ -25,6 +21,10 @@ write_files:
             es_instance_name: "node1"
             es_config:
               network.host: "0.0.0.0"
+          - role: entercloudsuite.kibana
+            kibana_package: kibana=6.4.3
+            kibana_server_port: 5601
+            kibana_server_host: "0.0.0.0"
           - role: entercloudsuite.prometheus-exporter
             prometheus_exporter_name: node_exporter
             prometheus_exporter_version: 0.16.0
