@@ -2,7 +2,7 @@
 module "elasticsearch-kibana" {
   source = "github.com/entercloudsuite/terraform-modules//openstack/instance?ref=2.7"
   name = "${var.name}"
-  image = "ecs-elasticsearch 1.0.6"
+  image = "ecs-elasticsearch 1.0.4"
   quantity = "1"
   flavor = "${var.flavor}"
   network_name = "${var.network_name}"
