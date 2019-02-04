@@ -22,7 +22,31 @@ write_files:
               body_format: json
           - shell: metricbeat setup --dashboards && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
           - shell: auditbeat setup --dashboards 
-          - shell: wget https://git.io/fpqdr -O /root/rotate_elasticsearch.sh && chmod +x /root/rotate_elasticsearch.sh && echo "15 2   * * *  root  bash /root/rotate_elasticsearch.sh" >> /etc/crontab
+          - name: Create retention script
+            copy:
+              dest: "/root/rotate_elasticsearch.sh"
+              content: |
+                 TODAY=`date +%Y.%m.%d`
+                 URL="http://127.0.0.1:9200"
+
+                 close_week_old_indices()
+                 {
+                   WEEK_FROM_TODAY=`date +%Y.%m.%d -d -7days`
+                   INDEX=*beat*-$WEEK_FROM_TODAY
+                   curl -XPOST $URL/$INDEX/_close
+                 }
+                 
+                 delete_7day_old_indices()
+                 {
+                   DAYS7_FROM_TODAY=`date +%Y.%m.%d -d -7days`
+                   INDEX=*beat*-$DAYS7_FROM_TODAY
+                   curl -XDELETE $URL/$INDEX
+                 }
+
+                 # main()
+                 close_week_old_indices
+                 delete_7day_old_indices
+          - shell: chmod +x /root/rotate_elasticsearch.sh && echo "15 2   * * *  root  bash /root/rotate_elasticsearch.sh" >> /etc/crontab
         roles:
           - role: entercloudsuite.elasticsearch
             es_enable_xpack: true
