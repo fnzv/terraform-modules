@@ -20,7 +20,12 @@ write_files:
                DNT: "1"    
               body: '{"attributes":{"title":"filebeat-*","timeFieldName":"@timestamp"}}'
               body_format: json
-          - shell: metricbeat setup --dashboards && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
+          - name: Enable docker on metricbeat
+            copy: remote_src=True src=/etc/metricbeat/modules.d/docker.yml.disabled dest=/etc/metricbeat/modules.d/docker.yml
+          - name: Restart service metricbeat
+            service:
+             name: metricbeat
+             state: restart
           - shell: auditbeat setup --dashboards 
           - name: Create retention script
             copy:
