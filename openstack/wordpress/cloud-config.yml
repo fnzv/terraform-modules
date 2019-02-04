@@ -5,7 +5,12 @@ write_files:
   - content: |
       - hosts: localhost
         post_tasks:
-          - shell:  mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
+          - name: Enable docker on metricbeat
+            copy: remote_src=True src=/etc/metricbeat/modules.d/docker.yml.disabled dest=/etc/metricbeat/modules.d/docker.yml
+          - name: Restart service metricbeat
+            service:
+             name: metricbeat
+             state: restart
         pre_tasks:
           - name: stop consul
             service: name=consul state=stopped
