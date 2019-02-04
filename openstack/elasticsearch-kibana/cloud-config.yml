@@ -18,7 +18,7 @@ write_files:
                kbn-version: "6.4.3"
                origin: "http://127.1:5601"
                DNT: "1"    
-              body: "{"attributes":{"title":"filebeat-*","timeFieldName":"@timestamp"}}"
+              body: '{"attributes":{"title":"filebeat-*","timeFieldName":"@timestamp"}}'
               body_format: json
           - shell: metricbeat setup --dashboards && mv /etc/metricbeat/modules.d/docker.yml.disabled /etc/metricbeat/modules.d/docker.yml && service metricbeat restart
           - shell: auditbeat setup --dashboards 
