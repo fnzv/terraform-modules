@@ -10,7 +10,7 @@ write_files:
           - name: Restart service metricbeat
             service:
              name: metricbeat
-             state: reload
+             state: restarted
         pre_tasks:
           - name: stop consul
             service: name=consul state=stopped
