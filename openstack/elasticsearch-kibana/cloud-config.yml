@@ -26,6 +26,7 @@ write_files:
             service:
              name: metricbeat
              state: restarted
+          - shell: metricbeat setup --dashboards 
           - shell: auditbeat setup --dashboards 
           - name: Create retention script
             copy:
