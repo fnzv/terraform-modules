@@ -25,5 +25,5 @@ data "template_file" "cloud-config" {
   consul_port = "${var.consul_port}"
   consul_datacenter = "${var.consul_datacenter}"
   consul_encrypt = "${var.consul_encrypt}"
-    }
+  }
 }
